@@ -1,0 +1,7 @@
+lib/nfoiled.rb
+LICENSE.text
+Rakefile
+README.markdown
+spec/nfoiled_spec.rb
+spec/spec_helper.rb
+.manifest
