@@ -1,0 +1,1 @@
+require 'nfoiled/core_ext/symbol'
