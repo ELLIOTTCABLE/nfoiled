@@ -52,6 +52,22 @@ You can contribute bug fixes or new features to Nfoiled by forking the project
 on GitHub (you'll need to register for an account first), and sending me a
 pull request once you've committed your changes.
 
+Links
+-----
+
+- [GitHub](http://github.com/elliottcable/nfoiled "Nfoiled on GitHub") is the
+    project's primary repository host, and currently also the project's home
+    page
+- [RubyForge](http://rubyforge.org/projects/nfoiled "Nfoiled on RubyForge") is
+    out primary RubyGem host, as well as an alternative repository host
+- [integrity](http://integrit.yreality.net/nfoiled "Nfoiled on yreality's integrity server")
+    is out continuous integration server - if the top build on that page is
+    green, you can assume the latest git HEAD is safe to run/install/utilize.
+- [Gitorious](http://gitorious.org/projects/nfoiled "Nfoiled on Gitorious") is
+    an alternative repository host
+- [repo.or.cz](http://repo.or.cz/w/nfoiled.git "Nfoiled on repo.or.cz") is
+    an alternative repository host
+
 License
 -------
 Nfoiled is copyright 2008 by elliott cable.
