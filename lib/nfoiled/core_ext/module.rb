@@ -31,7 +31,7 @@ class Module
       attribute = "@#{attribute}"
       
       define_method reader do
-        return instance_variable_get attribute if instance_variables.include? attribute
+        return instance_variable_get(attribute) if instance_variables.include? attribute
         instance_variable_set attribute, default
       end if options[:reader]
       
