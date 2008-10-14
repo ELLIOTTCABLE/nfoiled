@@ -1,2 +1,3 @@
-meta
 .yardoc
+meta/
+pkg/
