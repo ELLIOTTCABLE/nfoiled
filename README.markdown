@@ -4,6 +4,20 @@ The Rubyist's interface to [Ncurses][].
 
 [Ncurses]: <http://www.gnu.org/software/ncurses/> "ncurses - terminal text handling library"
 
+History
+-------
+As in, "Ncurses, Nfoiled Nagain!". Nfoiled is an object-oriented Ruby wrapper
+for [ncurses-ruby][], and therefore, Ncurses. I really got tired of the
+idiosyncrasies of Ncurses' API (it's written in a C style, not very clean, and
+definitely not object-oriented)... since ncurses-ruby does nothing more than
+make the C API available to Ruby as methods, it's no better. While working on
+[rat][], I set out to abstract the ncurses-ruby API to a system of objects and
+classes, in the truly Ruby style I'm used to. Now I've decided to abstract
+this code out and make it available separately... hence Nfoiled!
+
+[ncurses-ruby]: <http://ncurses-ruby.berlios.de/> "ncurses-ruby - access the ncurses library in Ruby"
+[rat]: <http://github.com/elliottcable/rat> "rat - terminal chat client"
+
 Installing
 ----------
 You can install Nfoiled as a pre-built gem, or as a gem generated directly
@@ -31,20 +45,6 @@ as well as [rake][]:
 [git]: <http://git-scm.com/> "git - Fast Version Control System"
 [RubyGems]: <http://rubyforge.org/projects/rubygems/> "RubyGems - Ruby package manager"
 [RubyForge]: <http://rubyforge.org/projects/nfoiled/> "Nfoiled on RubyForge"
-
-History
--------
-As in, "Ncurses, Nfoiled Nagain!". Nfoiled is an object-oriented Ruby wrapper
-for [ncurses-ruby][], and therefore, Ncurses. I really got tired of the
-idiosyncrasies of Ncurses' API (it's written in a C style, not very clean, and
-definitely not object-oriented)... since ncurses-ruby does nothing more than
-make the C API available to Ruby as methods, it's no better. While working on
-[rat][], I set out to abstract the ncurses-ruby API to a system of objects and
-classes, in the truly Ruby style I'm used to. Now I've decided to abstract
-this code out and make it available separately... hence Nfoiled!
-
-[ncurses-ruby]: <http://ncurses-ruby.berlios.de/> "ncurses-ruby - access the ncurses library in Ruby"
-[rat]: <http://github.com/elliottcable/rat> "rat - terminal chat client"
 
 Contributing
 ------------
