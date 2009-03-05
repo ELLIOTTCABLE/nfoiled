@@ -1,3 +1,4 @@
+lib/nfoiled/window.rb
 lib/nfoiled.rb
 LICENSE.text
 Rakefile.rb
