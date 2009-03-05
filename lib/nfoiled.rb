@@ -1,3 +1,5 @@
+require 'ncurses'
+
 ##
 # See `README.markdown`.
 module Nfoiled
