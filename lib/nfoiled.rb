@@ -10,6 +10,7 @@ module Nfoiled
   class <<self
     attr_accessor :initialized; alias_method :initialized?, :initialized
     attr_accessor :default_terminal
+    attr_accessor :current_terminal
     
     ##
     # This module method is responsible for setting up the entirety of Nfoiled's
@@ -21,6 +22,7 @@ module Nfoiled
     def initialize!
       self.initialized = true
       self.default_terminal = Terminal.new if Terminal.terminals.empty?
+      self.current_terminal = default_terminal unless current_terminal
       at_exit { Nfoiled.finalize }
     end
     
@@ -39,6 +41,7 @@ module Nfoiled
       self.initialized = false
       ::Ncurses.endwin
       Terminal.terminals.each {|t| t.destroy! }
+      self.current_terminal, self.default_terminal = nil
     end
     
     ##
