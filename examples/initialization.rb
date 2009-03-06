@@ -15,7 +15,8 @@ at_exit { ::Ncurses.endwin }
 # memory and initializes all variables.
 ::Ncurses.newterm(nil, STDOUT, STDIN)
 
-# Finally, we have to update the display.
+# Finally, we have to update the display. This preforms the actual clearing of
+# the screen.
 ::Ncurses.doupdate
 
 sleep 10
