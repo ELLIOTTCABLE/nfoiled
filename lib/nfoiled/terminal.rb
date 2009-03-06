@@ -7,8 +7,16 @@ module Nfoiled
   class Terminal
     
     class <<self
+      # An array of known `Terminal` instances
       attr_reader :terminals
       def terminals; @terminals ||= Array.new; end
+      
+      # The currently active `Terminal` instance
+      attr_accessor :current
+      
+      # The initial `Terminal` instance, if Nfoiled is initialized without an
+      # existing `Terminal`.
+      attr_accessor :default
     end
     
     attr_reader :output
