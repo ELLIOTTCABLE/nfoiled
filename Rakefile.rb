@@ -13,7 +13,7 @@ begin
   task :package => :'package:package'
   task :manifest => :'package:manifest'
   namespace :package do
-    Echoe.new('nfoiled', Nfoiled::VERSION) do |g|
+    Echoe.new('nfoiled', Nfoiled::Version) do |g|
       g.project = 'nfoiled'
       g.author = ['elliottcable']
       g.email = ['Nfoiled@elliottcable.com']
@@ -30,7 +30,7 @@ begin
     desc 'tests packaged files to ensure they are all present'
     task :verify => :package do
       # An error message will be displayed if files are missing
-      if system %(ruby -e "require 'rubygems'; require 'pkg/nfoiled-#{Nfoiled::VERSION}/lib/nfoiled'")
+      if system %(ruby -e "require 'rubygems'; require 'pkg/nfoiled-#{Nfoiled::Version}/lib/nfoiled'")
         puts "\nThe library files are present"
       end
     end

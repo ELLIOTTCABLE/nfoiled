@@ -3,7 +3,7 @@ require 'ncurses'
 ##
 # See `README.markdown`.
 module Nfoiled
-  VERSION = 0
+  Version = 0
   
   class <<self
     @initialized = false
