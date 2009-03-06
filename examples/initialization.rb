@@ -3,7 +3,8 @@ require 'nfoiled'
 
 ##
 # This example provides a simple example of setting up an Ncurses interface,
-# and then tearing it down.
+# and then tearing it down. Nothing will be observed other than the clearing
+# of the terminal for 10 seconds.
 
 # First, we need to ensure that Ncurses will exit cleanly (that is, we don't
 # want an interrupt or fatal error to screw up the terminal output after the
@@ -12,12 +13,9 @@ at_exit { ::Ncurses.endwin }
 
 # Second, the actual initialization of Ncurses. This allocates the necessary
 # memory and initializes all variables.
-::Ncurses.initscr
+::Ncurses.newterm(nil, STDOUT, STDIN)
 
 # Finally, we have to update the display.
 ::Ncurses.doupdate
-
-# Let's print something and exit!
-puts "woot!"
 
 sleep 10
