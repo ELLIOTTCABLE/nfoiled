@@ -7,6 +7,7 @@ module Nfoiled
   class Terminal
     
     class <<self
+      attr_reader :terminals
       def terminals; @terminals ||= Array.new; end
     end
     
