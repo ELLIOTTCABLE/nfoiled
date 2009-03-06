@@ -6,11 +6,18 @@ module Nfoiled
   # to deal with `Terminal` at all.
   class Terminal
     
+    class <<self
+      @terminals = Array.new
+      attr_reader :terminals
+    end
+    
     ##
     # Responsible for creating a new `Terminal`. See `newterm(3X)`.
     def initialize opts = Hash.new
       { :out => STDOUT, :in => STDIN }.merge opts
-      return ::Ncurses.newterm(opts[:term], opts[:out], opts[:in])
+      t = ::Ncurses.newterm(opts[:term], opts[:out], opts[:in])
+      terminals << t
+      return t
     end
   end
 end
