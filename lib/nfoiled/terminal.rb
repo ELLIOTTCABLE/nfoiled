@@ -24,7 +24,7 @@ module Nfoiled
       @term = opts[:term]
       
       @wrapee = ::Ncurses.newterm(opts[:term], opts[:out], opts[:in])
-      Terminal.terminals << @wrapee
+      Terminal.terminals << self
     end
   end
 end
