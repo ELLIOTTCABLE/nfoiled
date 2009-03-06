@@ -6,7 +6,6 @@ module Nfoiled
   Version = 0
   
   class <<self
-    @initialized = false
     attr_accessor :initialized
     alias_method :initialized?, :initialized
   end
