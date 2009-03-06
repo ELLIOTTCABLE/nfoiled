@@ -27,7 +27,10 @@ module Nfoiled
       Terminal.terminals << self
     end
     
-    def destroy
+    ##
+    # Destroys the `wrapee` of this `Terminal`, and removes this `Terminal`
+    # from `Terminal.terminals`.
+    def destroy!
       ::Ncurses.delscreen(@wrapee)
       Terminal.terminals.delete self
     end
