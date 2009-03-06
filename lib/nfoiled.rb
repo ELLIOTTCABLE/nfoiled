@@ -38,6 +38,7 @@ module Nfoiled
     def finalize!
       self.initialized = false
       ::Ncurses.endwin
+      Terminal.terminals.each {|t| t.destroy! }
     end
     
     ##
