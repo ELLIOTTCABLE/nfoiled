@@ -26,5 +26,10 @@ module Nfoiled
       @wrapee = ::Ncurses.newterm(opts[:term], opts[:out], opts[:in])
       Terminal.terminals << self
     end
+    
+    def destroy
+      ::Ncurses.delscreen(@wrapee)
+      Terminal.terminals.delete self
+    end
   end
 end
