@@ -7,8 +7,7 @@ module Nfoiled
   class Terminal
     
     class <<self
-      @terminals = Array.new
-      attr_reader :terminals
+      def terminals; @terminals ||= Array.new; end
     end
     
     attr_reader :output
@@ -25,7 +24,7 @@ module Nfoiled
       @term = opts[:term]
       
       @wrapee = ::Ncurses.newterm(opts[:term], opts[:out], opts[:in])
-      terminals << @wrapee
+      Terminal.terminals << @wrapee
     end
   end
 end
