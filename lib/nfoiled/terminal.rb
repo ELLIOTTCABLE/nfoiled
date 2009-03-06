@@ -11,13 +11,21 @@ module Nfoiled
       attr_reader :terminals
     end
     
+    attr_reader :output
+    attr_reader :input
+    attr_reader :term
+    attr_reader :wrapee
+    
     ##
     # Responsible for creating a new `Terminal`. See `newterm(3X)`.
     def initialize opts = Hash.new
-      { :out => STDOUT, :in => STDIN }.merge opts
-      t = ::Ncurses.newterm(opts[:term], opts[:out], opts[:in])
-      terminals << t
-      return t
+      { :output => STDOUT, :input => STDIN }.merge opts
+      @output = opts[:output]
+      @input = opts[:input]
+      @term = opts[:term]
+      
+      @wrapee = ::Ncurses.newterm(opts[:term], opts[:out], opts[:in])
+      terminals << @wrapee
     end
   end
 end
