@@ -11,10 +11,6 @@ require 'nfoiled'
 # program exists).
 Nfoiled::initialize
 
-# Second, the actual initialization of Ncurses. This allocates the necessary
-# memory and initializes all variables.
-::Ncurses.newterm(nil, STDOUT, STDIN)
-
 # Finally, we have to update the display. This preforms the actual clearing of
 # the screen.
 ::Ncurses.doupdate

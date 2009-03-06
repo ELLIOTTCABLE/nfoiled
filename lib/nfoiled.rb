@@ -1,3 +1,5 @@
+require 'nfoiled/terminal'
+
 require 'ncurses'
 
 ##
@@ -18,6 +20,7 @@ module Nfoiled
     # `at_exit`.
     def initialize!
       self.initialized = true
+      self.default_terminal = Terminal.new if Terminal.terminals.empty?
       at_exit { Nfoiled.finalize }
     end
     
