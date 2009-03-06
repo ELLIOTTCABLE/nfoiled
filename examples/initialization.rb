@@ -9,7 +9,7 @@ require 'nfoiled'
 # First, we need to ensure that Ncurses will exit cleanly (that is, we don't
 # want an interrupt or fatal error to screw up the terminal output after the
 # program exists).
-at_exit { ::Ncurses.endwin }
+Nfoiled::initialize
 
 # Second, the actual initialization of Ncurses. This allocates the necessary
 # memory and initializes all variables.
