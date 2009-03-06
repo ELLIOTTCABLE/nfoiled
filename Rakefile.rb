@@ -12,15 +12,17 @@ begin
   task :package => :'package:install'
   task :manifest => :'package:manifest'
   namespace :package do
-    Echoe.new('nfoiled', Nfoiled::VERSION) do |g|; g.name = 'Nfoiled'
+    Echoe.new('nfoiled', Nfoiled::VERSION) do |g|
       g.project = 'nfoiled'
       g.author = ['elliottcable']
       g.email = ['Nfoiled@elliottcable.com']
       g.summary = 'The Rubyist\'s interface to Ncurses.'
       g.url = 'http://github.com/elliottcable/nfoiled'
       g.runtime_dependencies = ['ncurses'] #, 'yard >=0.2.3'
-      g.development_dependencies = ['echoe', 'rspec', 'rcov', 'yard', 'stringray']
+      g.development_dependencies = ['echoe >= 3.0.2', 'rspec', 'rcov', 'yard', 'stringray']
       g.manifest_name = '.manifest'
+      g.retain_gemspec = true
+      g.rakefile_name = 'Rakefile.rb'
       g.ignore_pattern = /^\.git\/|^meta\/|\.gemspec/
     end
   
@@ -31,14 +33,6 @@ begin
         puts "\nThe library files are present"
       end
     end
-
-    task :copy_gemspec => [:package] do
-      pkg = Dir['pkg/*'].select {|dir| File.directory? dir}.last
-      mv File.join(pkg, pkg.gsub(/^pkg\//,'').gsub(/\-\d+$/,'.gemspec')), './'
-    end
-
-    desc 'builds a gemspec as GitHub wants it'
-    task :gemspec => [:package, :copy_gemspec, :clobber_package]
   end
   
 rescue LoadError
