@@ -9,7 +9,8 @@ require 'fileutils'
 begin
   require 'echoe'
   
-  task :package => :'package:install'
+  task :install => :'package:install'
+  task :package => :'package:package'
   task :manifest => :'package:manifest'
   namespace :package do
     Echoe.new('nfoiled', Nfoiled::VERSION) do |g|
