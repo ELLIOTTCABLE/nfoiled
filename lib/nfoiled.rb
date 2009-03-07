@@ -19,8 +19,7 @@ module Nfoiled
     # `at_exit`.
     def initialize!
       self.initialized = true
-      Terminal.default = Terminal.new     unless Terminal.current
-      Terminal.current = Terminal.default unless Terminal.current
+      Terminal.default = Terminal.new unless Terminal.current
       at_exit { Nfoiled.finalize }
     end
     
