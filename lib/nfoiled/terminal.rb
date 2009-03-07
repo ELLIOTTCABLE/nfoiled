@@ -60,6 +60,15 @@ module Nfoiled
     end
     
     ##
+    # 'Activates' a `Terminal`, destroying all windows and environment from
+    # the current `Terminal` and replacing it with those of this one.
+    def activate!
+      require_wrapee!
+      ::Ncurses.set_term(@wrapee)
+      Terminal.current = self
+    end
+    
+    ##
     # Destroys the `wrapee` of this `Terminal`, and removes this `Terminal`
     # from `Terminal.terminals`.
     def destroy!
