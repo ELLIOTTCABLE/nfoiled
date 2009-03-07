@@ -19,10 +19,21 @@ module Nfoiled
       attr_accessor :default
     end
     
+    # The IO object to which output will be managed
     attr_reader :output
+    
+    # The IO object on which input will be watched
     attr_reader :input
+    
+    # TODO: Figure out what this does!
     attr_reader :term
+    
+    # The actual terminal object as returned by Ncurses
     attr_reader :wrapee
+    
+    # An array of known windows belonging to this Terminal
+    attr_reader :windows
+    def windows; @windows ||= Array.new; end
     
     ##
     # Responsible for creating a new `Terminal`. See `newterm(3X)`.

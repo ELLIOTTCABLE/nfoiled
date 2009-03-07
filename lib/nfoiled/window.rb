@@ -5,6 +5,9 @@ module Nfoiled
   # will utilize only one of these, a single `Window` covering the entirety
   # of the `Terminal`'s available area.
   class Window
+    # This is simply an accessor for all the windows on the current Terminal.
+    def windows; Terminal.current ? Terminal.current.windows : nil; end
+    
     
   end
 end

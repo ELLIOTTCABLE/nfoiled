@@ -1,4 +1,5 @@
 require 'nfoiled/terminal'
+require 'nfoiled/window'
 
 require 'ncurses'
 
