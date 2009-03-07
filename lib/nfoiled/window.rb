@@ -6,7 +6,7 @@ module Nfoiled
   # of the `Terminal`'s available area.
   class Window
     # This is simply an accessor for all the windows on the current Terminal.
-    def windows; Terminal.current ? Terminal.current.windows : nil; end
+    def windows; Terminal.current.windows; end
     
     
   end
