@@ -6,13 +6,13 @@ require 'nfoiled'
 # and then tearing it down. Nothing will be observed other than the clearing
 # of the terminal for 10 seconds.
 
-# First, we need to ensure that Ncurses will exit cleanly (that is, we don't
-# want an interrupt or fatal error to screw up the terminal output after the
-# program exists).
+# A call to `Nfoiled::initialize` will, basically, do everything for us. Many
+# other initialization methods actually call this for us anyway, so we could
+# even just jump right in and instantiate a window if we so desired.
 Nfoiled::initialize
 
-# Finally, we have to update the display. This preforms the actual clearing of
-# the screen.
+# The only thing left to do is update the display, to actually cause it to
+# display!
 ::Ncurses.doupdate
 
 sleep 10
