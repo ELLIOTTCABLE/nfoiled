@@ -64,8 +64,9 @@ module Nfoiled
     # the current `Terminal` and replacing it with those of this one.
     def activate!
       require_wrapee!
+      previous, Terminal.current = Terminal.current, self
       ::Ncurses.set_term(@wrapee)
-      Terminal.current = self
+      return previous
     end
     
     ##
