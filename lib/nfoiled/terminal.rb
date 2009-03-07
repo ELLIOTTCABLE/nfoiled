@@ -27,7 +27,7 @@ module Nfoiled
     # The IO object on which input will be watched
     attr_reader :input
     
-    # TODO: Figure out what this does!
+    # The type of the terminal ('vt102', 'xterm', etc)
     attr_reader :term
     
     # The actual terminal object as returned by Ncurses
