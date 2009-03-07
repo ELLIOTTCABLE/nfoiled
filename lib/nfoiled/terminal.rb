@@ -74,9 +74,12 @@ module Nfoiled
     # from `Terminal.terminals`.
     def destroy!
       require_wrapee!
+      old_term = activate!
+      ::Ncurses.endwin
       ::Ncurses.delscreen(@wrapee)
       Terminal.terminals.delete self
       @wrapee = nil
+      old_term.activate! if old_term.wrapee
     end
   end
 end
