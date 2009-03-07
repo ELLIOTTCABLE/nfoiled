@@ -6,8 +6,6 @@ module Nfoiled
   # user shouldn't need to deal with `Terminal` at all.
   class Terminal
     
-    class MissingTerminalError < StandardError; end
-    
     class <<self
       # An array of known `Terminal` instances
       attr_reader :terminals
@@ -52,34 +50,36 @@ module Nfoiled
     end
     
     ##
-    # This method raises an error if it is called when this `Terminal` is no
-    # longer useable.
-    def require_wrapee!
-      raise MissingTerminalError, "Terminal not found! (did you `#destroy!` it?)" unless
-        @wrapee and Terminal.terminals.include?(self)
-    end
-    
-    ##
     # 'Activates' a `Terminal`, destroying all windows and environment from
     # the current `Terminal` and replacing it with those of this one.
     def activate!
-      require_wrapee!
-      previous, Terminal.current = Terminal.current, self
       ::Ncurses.set_term(@wrapee)
+      previous, Terminal.current = Terminal.current, self
       return previous
     end
     
     ##
+    # Simply calls `#activate!` if this `Terminal` isn't already active.
+    def activate
+      activate! unless active?
+    end
+    
+    ##
+    # Simply cheks if `Terminal.current == self`
+    def active?
+      Terminal.current == self
+    end
+    
+    ##
     # Destroys the `wrapee` of this `Terminal`, and removes this `Terminal`
-    # from `Terminal.terminals`.
+    # from `Terminal.terminals`
     def destroy!
-      require_wrapee!
-      old_term = activate!
+      old_term = activate
       ::Ncurses.endwin
       ::Ncurses.delscreen(@wrapee)
       Terminal.terminals.delete self
       @wrapee = nil
-      old_term.activate! if old_term.wrapee
+      old_term.activate if old_term
     end
   end
 end
