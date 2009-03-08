@@ -46,6 +46,7 @@ module Nfoiled
     # Prints a string to the window
     def print string
       @wrapee.printw string
+      @wrapee.wnoutrefresh
     end
     
     ##

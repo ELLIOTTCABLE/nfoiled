@@ -25,8 +25,6 @@ left.print  "left-brain"
 right.print "right-brain"
 
 # ... aaaaand update again!
-left.wrapee.wnoutrefresh
-right.wrapee.wnoutrefresh
 ::Ncurses.doupdate
 
 sleep 5
