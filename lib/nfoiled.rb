@@ -33,6 +33,14 @@ module Nfoiled
     public :initialize
     
     ##
+    # Causes an cycling of the physical window with the virtual window.
+    # 
+    # Warning: You have to update the virtual window first!
+    def update!
+      ::Ncurses.doupdate
+    end
+    
+    ##
     # This method is responsible for tearing down any environment set up by the
     # `Ncurses::initialize!` method.
     def finalize!

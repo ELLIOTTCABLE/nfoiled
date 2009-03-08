@@ -13,6 +13,6 @@ Nfoiled::initialize
 
 # The only thing left to do is update the display, to actually cause it to
 # display!
-::Ncurses.doupdate
+Nfoiled::update!
 
 sleep 5

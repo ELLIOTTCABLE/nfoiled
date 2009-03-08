@@ -18,13 +18,13 @@ right = Nfoiled::Window.new :top => 0,
                             :width => ::Ncurses.COLS / 2
 
 # As per usual, the screen doesn't update until we actually tell it to.
-::Ncurses.doupdate
+Nfoiled::update!
 
 # Let's print some stuff, just to see
 left.print  "left-brain"
 right.print "right-brain"
 
 # ... aaaaand update again!
-::Ncurses.doupdate
+Nfoiled::update!
 
 sleep 5

@@ -11,12 +11,12 @@ term2 = Nfoiled::Terminal.new
 
 # Rembmer that creating a new `Terminal` also activates it, so `term2` is
 # active right now!
-::Ncurses.doupdate
+Nfoiled::update!
 
 sleep 2.5
 
 # Now let's switch to `term1`.
 term1.activate!
-::Ncurses.doupdate
+Nfoiled::update!
 
 sleep 2.5
