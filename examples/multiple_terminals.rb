@@ -13,10 +13,10 @@ term2 = Nfoiled::Terminal.new
 # active right now!
 ::Ncurses.doupdate
 
-sleep 5
+sleep 2.5
 
 # Now let's switch to `term1`.
 term1.activate!
 ::Ncurses.doupdate
 
-sleep 5
+sleep 2.5

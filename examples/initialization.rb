@@ -15,4 +15,4 @@ Nfoiled::initialize
 # display!
 ::Ncurses.doupdate
 
-sleep 10
+sleep 5

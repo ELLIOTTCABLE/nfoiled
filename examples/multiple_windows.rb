@@ -29,4 +29,4 @@ left.wrapee.wnoutrefresh
 right.wrapee.wnoutrefresh
 ::Ncurses.doupdate
 
-sleep 10
+sleep 5
