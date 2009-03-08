@@ -31,16 +31,15 @@ module Nfoiled
     # Responsible for creating a new `Window`, this will also take care of
     # initializing Ncurses if necessary.
     def initialize opts = Hash.new
-      { :top => 0, :left => 0, :height => 0, :width => 0 }.merge opts
       Nfoiled::initialize
-      @top = opts[:top]
-      @left = opts[:left]
-      @height = opts[:height]
-      @width = opts[:width]
       
-      @wrapee = ::Ncurses.newwin(opts[:height], opts[:width], opts[:top], opts[:left])
-      @owner = Terminal.current
-      @owner.windows << self
+      @wrapee = ::Ncurses.newwin(
+        opts[:height] ? @height = opts[:height] : 0,
+        opts[:width]  ? @width =  opts[:width]  : 0,
+        opts[:top]    ? @top =    opts[:top]    : 0,
+        opts[:left]   ? @left =   opts[:left]   : 0)
+      
+      (@owner = Terminal.current).windows << self
     end
     
     ##
