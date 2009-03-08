@@ -43,6 +43,12 @@ module Nfoiled
     end
     
     ##
+    # Prints a string to the window
+    def print string
+      @wrapee.printw string
+    end
+    
+    ##
     # Destroys the `wrapee` of this `Window`, and removes this `Window`
     # from its owning `Terminal`'s `#windows`.
     def destroy!
