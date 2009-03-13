@@ -1,7 +1,6 @@
 module Nfoiled
   ##
   # This is the class of a single character of input received by Nfoiled.
-  # Handles modifiers for you.
   class Key
     Names = {       0 => :null, 1 => :soh,  2 => :stx,  3 => :etx,
         4 => :eot,  5 => :enq,  6 => :ack,  7 => :bell, 8 => :backspace,
@@ -25,9 +24,9 @@ module Nfoiled
     attr_reader :char
     
     ##
-    # Creates a new `Key`, including any modifiers.
-    def initialize symish
-      @char = symish.to_sym
+    # Creates a new `Key`. Input will be turned into a symbol if possible.
+    def initialize stringish
+      @char = stringish.respond_to?(:to_s) ? stringish.to_s.to_sym : stringish.to_sym
     end
   end
 end
