@@ -1,7 +1,8 @@
+require 'ncurses'
+
+require 'nfoiled/key'
 require 'nfoiled/terminal'
 require 'nfoiled/window'
-
-require 'ncurses'
 
 ##
 # See `README.markdown`.
