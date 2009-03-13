@@ -34,8 +34,8 @@ module Nfoiled
       Nfoiled::initialize
       
       @wrapee = ::Ncurses.newwin(
-        opts[:height] ? @height = opts[:height] : 0,
-        opts[:width]  ? @width =  opts[:width]  : 0,
+        opts[:height] ? @height = opts[:height] : ::Ncurses.LINES,
+        opts[:width]  ? @width =  opts[:width]  : ::Ncurses.COLS,
         opts[:top]    ? @top =    opts[:top]    : 0,
         opts[:left]   ? @left =   opts[:left]   : 0)
       
