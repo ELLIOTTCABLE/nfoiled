@@ -31,6 +31,9 @@ module Nfoiled
     # The `Terminal` that this `Window` pertains to
     attr_reader :owner
     
+    # The proc to be run when a character is received
+    attr_accessor :on_key
+    
     # ====================
     # = Setup / Teardown =
     # ====================
@@ -57,6 +60,16 @@ module Nfoiled
       ::Ncurses.delwin(@wrapee)
       @wrapee = nil
       @owner.windows.delete self
+    end
+    
+    # =========
+    # = Input =
+    # =========
+    
+    # This acts as both a getter & setter, depending on whether a block is
+    # passed in or not.
+    def on_key
+      block_given? ? @on_key = Proc.new : @on_key
     end
     
     # ==========
