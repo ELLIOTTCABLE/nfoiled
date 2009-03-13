@@ -24,15 +24,10 @@ module Nfoiled
     # The character corresponding to this keypress
     attr_reader :char
     
-    # Any modifier keys associating this keypress
-    attr_reader :modifiers
-    
     ##
     # Creates a new `Key`, including any modifiers.
-    def initialize char, opts = Hash.new
-      { :modifiers => [] }.merge opts
-      @modifiers = opts[:modifiers]
-      @char = char.to_sym
+    def initialize symish
+      @char = symish.to_sym
     end
   end
 end
