@@ -14,7 +14,6 @@ module Nfoiled
     ##
     # Responsible for processing input from `Nfoiled::read!`. Returns
     def self.process charint
-      return unless charint
       new case charint
         when 9, 32..126; then charint.chr
         else                  Names[charint]
