@@ -68,6 +68,7 @@ module Nfoiled
     # = Input =
     # =========
     
+    ##
     # This acts as both a getter & setter, depending on whether a block is
     # passed in or not.
     def on_key
