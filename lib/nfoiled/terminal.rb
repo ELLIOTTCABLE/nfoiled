@@ -62,7 +62,7 @@ module Nfoiled
     # the current `Terminal` and replacing it with those of this one. See
     # `set_term(3X)`.
     def activate!
-      ::Ncurses.set_term(@wrapee)
+      ::Ncurses.set_term(wrapee)
       Terminal.current = self
     end
     
@@ -85,7 +85,7 @@ module Nfoiled
       previous = Terminal.current
       activate
       ::Ncurses.endwin
-      ::Ncurses.delscreen(@wrapee)
+      ::Ncurses.delscreen(wrapee)
       @wrapee = nil
       Terminal.terminals.delete self
       previous.activate if previous

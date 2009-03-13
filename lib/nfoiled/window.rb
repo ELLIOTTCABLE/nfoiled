@@ -50,7 +50,7 @@ module Nfoiled
         opts[:top]    ? @top =    opts[:top]    : 0,
         opts[:left]   ? @left =   opts[:left]   : 0)
       
-      ::Ncurses.wtimeout(@wrapee, 0) # Prevents ncurses from blocking for input
+      ::Ncurses.wtimeout(wrapee, 0) # Prevents ncurses from blocking for input
       
       (@owner = Terminal.current).windows << self
     end
@@ -59,9 +59,9 @@ module Nfoiled
     # Destroys the `wrapee` of this `Window`, and removes this `Window`
     # from its owning `Terminal`'s `#windows`. See `delwin(3X)`.
     def destroy!
-      ::Ncurses.delwin(@wrapee)
+      ::Ncurses.delwin(wrapee)
       @wrapee = nil
-      @owner.windows.delete self
+      owner.windows.delete self
     end
     
     # =========
@@ -79,7 +79,7 @@ module Nfoiled
     ##
     # This sets this `Window` as the current `Terminal.acceptor`.
     def focus!
-      @owner.acceptor = self
+      owner.acceptor = self
       update
     end
     
@@ -100,14 +100,14 @@ module Nfoiled
     ##
     # Prints a string to the window
     def print string
-      @wrapee.printw string
+      wrapee.printw string
       update
     end
     
     ##
     # Updates the virtual screen associated with this window. See `wnoutrefresh(3X)`.
     def update
-      @wrapee.wnoutrefresh
+      wrapee.wnoutrefresh
     end
     
     ##
