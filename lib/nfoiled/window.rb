@@ -69,6 +69,12 @@ module Nfoiled
     # =========
     
     ##
+    # This sets this `Window` as the current `Terminal.acceptor`.
+    def focus!
+      @owner.acceptor = self
+    end
+    
+    ##
     # This acts as both a getter & setter, depending on whether a block is
     # passed in or not.
     def on_key

@@ -35,6 +35,14 @@ module Nfoiled
     attr_reader :windows
     def windows; @windows ||= Array.new; end
     
+    # The `Window` responsible for accepting input to this Terminal. Defaults
+    # to the last created `Window`, unless one has been defined.
+    attr_accessor :acceptor
+    def acceptor; @acceptor || windows.last; end
+    def acceptor=(window)
+      @acceptor = window
+    end
+    
     ##
     # Responsible for creating a new `Terminal`. See `newterm(3X)`.
     def initialize opts = Hash.new

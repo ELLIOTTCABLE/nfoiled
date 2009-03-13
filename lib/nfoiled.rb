@@ -42,6 +42,10 @@ module Nfoiled
     # 
     # Warning: You have to update the virtual window first!
     def update!
+      # We need to ensure that the current input acceptor will have the cursor
+      # at all times, so we force a refresh on it (Ncurses leaves the cursor
+      # on the last window to be updated). See `doupdate(3X)`.
+      Terminal.current.acceptor.update
       ::Ncurses.doupdate
     end
     
