@@ -47,7 +47,7 @@ module Nfoiled
     
     ##
     # This method is responsible for tearing down any environment set up by the
-    # `Ncurses::initialize!` method.
+    # `Ncurses::initialize!` method. See `endwin(3X)`.
     def finalize!
       self.initialized = false
       ::Ncurses.endwin

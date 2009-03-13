@@ -40,7 +40,7 @@ module Nfoiled
     
     ##
     # Responsible for creating a new `Window`, this will also take care of
-    # initializing Ncurses if necessary.
+    # initializing Ncurses if necessary. See `newwin(3X)`.
     def initialize opts = Hash.new
       Nfoiled::initialize
       
@@ -57,7 +57,7 @@ module Nfoiled
     
     ##
     # Destroys the `wrapee` of this `Window`, and removes this `Window`
-    # from its owning `Terminal`'s `#windows`.
+    # from its owning `Terminal`'s `#windows`. See `delwin(3X)`.
     def destroy!
       ::Ncurses.delwin(@wrapee)
       @wrapee = nil

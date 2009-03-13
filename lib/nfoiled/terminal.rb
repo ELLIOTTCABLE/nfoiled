@@ -51,7 +51,8 @@ module Nfoiled
     
     ##
     # 'Activates' a `Terminal`, destroying all windows and environment from
-    # the current `Terminal` and replacing it with those of this one.
+    # the current `Terminal` and replacing it with those of this one. See
+    # `set_term(3X)`.
     def activate!
       ::Ncurses.set_term(@wrapee)
       Terminal.current = self
@@ -71,7 +72,7 @@ module Nfoiled
     
     ##
     # Destroys the `wrapee` of this `Terminal`, and removes this `Terminal`
-    # from `Terminal.terminals`
+    # from `Terminal.terminals`. See `endwin(3X)` and `delscreen(3X)`.
     def destroy!
       previous = Terminal.current
       activate
