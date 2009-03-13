@@ -50,6 +50,8 @@ module Nfoiled
         opts[:top]    ? @top =    opts[:top]    : 0,
         opts[:left]   ? @left =   opts[:left]   : 0)
       
+      ::Ncurses.wtimeout(@wrapee, 0) # Prevents ncurses from blocking for input
+      
       (@owner = Terminal.current).windows << self
     end
     

@@ -21,6 +21,11 @@ module Nfoiled
     def initialize!
       self.initialized = true
       Terminal.default = Terminal.new unless Terminal.current
+      
+      ::Ncurses.noecho # Characters will not be printed to the terminal by Ncurses for us
+      ::Ncurses.cbreak # No character processing is done, each individual character will be returned to `#getch`
+      ::Ncurses.raw    # Interrupt etc signals are all directed to us instead of handled by Ncurses
+      
       at_exit { Nfoiled.finalize }
     end
     
