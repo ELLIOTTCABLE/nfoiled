@@ -72,7 +72,7 @@ module Nfoiled
     # Gets a single character from the input buffer for this window. Returns
     # nil if there are no new characters in the buffer. See `wgetch(3X)`.
     def gets
-      chr = ::Ncurses.wgetch wrapee
+      chr = Key.process ::Ncurses.wgetch(wrapee)
       chr == -1 ? nil : chr
     end
     
