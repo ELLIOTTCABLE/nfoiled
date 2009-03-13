@@ -72,6 +72,7 @@ module Nfoiled
     # This sets this `Window` as the current `Terminal.acceptor`.
     def focus!
       @owner.acceptor = self
+      update
     end
     
     ##
