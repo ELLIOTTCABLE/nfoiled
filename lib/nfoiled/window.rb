@@ -82,6 +82,12 @@ module Nfoiled
     # Prints a string to the window
     def print string
       @wrapee.printw string
+      update
+    end
+    
+    ##
+    # Updates the virtual screen associated with this window. See `wnoutrefresh(3X)`.
+    def update
       @wrapee.wnoutrefresh
     end
     
