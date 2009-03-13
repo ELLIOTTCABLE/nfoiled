@@ -12,6 +12,10 @@ module Nfoiled
       def windows; Terminal.current.windows; end
     end
     
+    # ==============
+    # = Attributes =
+    # ==============
+    
     # The Y co-ordinate of the top left corner of this `Window`'s bounding box
     attr_reader :top
     # The X co-ordinate of the top left corner of this `Window`'s bounding box
@@ -26,6 +30,10 @@ module Nfoiled
     
     # The `Terminal` that this `Window` pertains to
     attr_reader :owner
+    
+    # ====================
+    # = Setup / Teardown =
+    # ====================
     
     ##
     # Responsible for creating a new `Window`, this will also take care of
@@ -43,6 +51,19 @@ module Nfoiled
     end
     
     ##
+    # Destroys the `wrapee` of this `Window`, and removes this `Window`
+    # from its owning `Terminal`'s `#windows`.
+    def destroy!
+      ::Ncurses.delwin(@wrapee)
+      @wrapee = nil
+      @owner.windows.delete self
+    end
+    
+    # ==========
+    # = Output =
+    # ==========
+    
+    ##
     # Prints a string to the window
     def print string
       @wrapee.printw string
@@ -53,15 +74,6 @@ module Nfoiled
     # Prints a string, followed by a newline, to the window
     def puts string
       self.print string.to_s + "\n"
-    end
-    
-    ##
-    # Destroys the `wrapee` of this `Window`, and removes this `Window`
-    # from its owning `Terminal`'s `#windows`.
-    def destroy!
-      ::Ncurses.delwin(@wrapee)
-      @wrapee = nil
-      @owner.windows.delete self
     end
   end
 end
