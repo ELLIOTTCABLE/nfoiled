@@ -67,6 +67,19 @@ module Nfoiled
       # TODO: Ensure finalization on fatal errors or interrupts
       finalize! if initialized?
     end
+    
+    ##
+    # This handles the global "input loop". Each character is processed into a
+    # `Key`, and then passed to the current input acceptor's `on_key` block
+    # (if such a block has been defined). See `getch(3X)`.
+    def read!
+      while true
+        key = Terminal.current.acceptor.gets
+        # TODO: This should be handled more naturally by a Key handler or something
+        exit if [Key.new(:etx), Key.new(:eot)].include? key # ^C, ^D
+        Terminal.current.acceptor.on_key[key] if key
+      end
+    end
   end
   
 end

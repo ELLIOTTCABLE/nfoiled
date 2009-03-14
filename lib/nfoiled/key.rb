@@ -29,5 +29,12 @@ module Nfoiled
     def initialize stringish
       @char = stringish.respond_to?(:to_s) ? stringish.to_s.to_sym : stringish.to_sym
     end
+    
+    ##
+    # Compares two keys' characters.
+    def == o
+      return false unless o.is_a? Key
+      self.char == o.char
+    end
   end
 end
