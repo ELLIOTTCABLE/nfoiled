@@ -3,7 +3,10 @@
   - A series of bytes corresponding to a single Unicode character, such
     as "√¶" (195,166), "·èú" (225,143,156), or "Ì†ÅÌ∞¶" (240,144,144,166)
 - A Sequence is a specific series of Keys
-  - An escape sequence, such as M-√¶ (27, (195,166))
+  - An escape sequence in an editor, such as:
+    M-√¶ (27, (195,166))
+  - A cheat sequence in a game, such as:
+    ‚Üí‚Üë‚Üí (M[C-M[A-M[C) ((27,91,67), (27,91,65), (27,91,67))
 
 - Not sure how to handle the fact that Unicode needs multiple bytes of input
   - Will I have to have some sort of global loop?
