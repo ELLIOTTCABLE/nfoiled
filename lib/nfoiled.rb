@@ -76,7 +76,7 @@ module Nfoiled
       while true
         Terminal.current.acceptor.getk do |key|
           # TODO: This should be handled more naturally by a Key handler or something
-          exit if [Key.new(:etx), Key.new(:eot)].include? key # ^C, ^D
+          break if [Key.new(:etx), Key.new(:eot)].include? key # ^C, ^D
           Terminal.current.acceptor.on_key[key]
         end
       end
