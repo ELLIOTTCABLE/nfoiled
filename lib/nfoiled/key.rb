@@ -2,13 +2,20 @@ module Nfoiled
   ##
   # This is the class of a single character of input received by Nfoiled.
   class Key
-    Names = {       0 => :null, 1 => :soh,  2 => :stx,  3 => :etx,
-        4 => :eot,  5 => :enq,  6 => :ack,  7 => :bell, 8 => :backspace,
-        9 => 9.chr,10 => :nl , 11 => :vt , 12 => :np , 13 => :cr ,
-       14 => :so , 15 => :si , 16 => :dle, 17 => :dc1, 18 => :dc2,
-       19 => :dc3, 20 => :dc4, 21 => :nak, 22 => :syn, 23 => :etb,
-       24 => :can, 25 => :em , 26 => :sub, 27=>:escape,28 => :fs,
-       29 => :gs , 30 => :rs , 31 => :us ,127 => :delete }
+    ##
+    # A container for some useful constants.
+    module ASCII
+      # TODO: Figure out meaning of, and proper capitalization of, some of
+      # these constants.
+      Null = NUL = 0; SOH = 1; STX = 2; ETX = 3; EOT = 4
+      ENQ = 5; Acknowledge = ACK = 6; Bell = BEL = 7; Backspace = BS = 8
+      Tab = HT = 9; Newline = NL = 10; VT = 11; NP = 12
+      CarriageReturn = CR = 13; SO = 14; SI = 15; DLE = 16
+      DC1 = 17; DC2 = 18; DC3 = 19; DC4 = 20
+      NAK = 21; SYN = 22; ETB = 23; CAN = 24
+      EM = 25; SUB = 26; Escape = ESC = 27; FS = 28
+      GS = 29; RS = 30; US = 31; Delete = DEL = 127
+    end
     
     ##
     # Creates a `Key` out of an ASCII integer.
