@@ -31,6 +31,17 @@ module Nfoiled
     # The `Terminal` that this `Window` pertains to
     attr_reader :owner
     
+    # The status of the global 'input lock' on this window. While locked, all
+    # `#getk` calls will return nil.
+    # 
+    # If you plan to use `#getb`, always check for a lock first - otherwise
+    # you could grab a Unicode byte right from the waiting hands of a Unicode
+    # character `Thread`!
+    attr_accessor :input_locked
+    alias_method :input_locked?, :input_locked
+    def lock_input!; self.input_locked = true; end
+    def unlock_input!; self.input_locked = false; end
+    
     # The proc to be run when a character is received
     attr_accessor :on_key
     
@@ -69,12 +80,97 @@ module Nfoiled
     # =========
     
     ##
-    # Gets a single character from the input buffer for this window. Returns
-    # nil if there are no new characters in the buffer. See `wgetch(3X)`.
-    def gets
-      chr = Key.process ::Ncurses.wgetch(wrapee)
-      chr == -1 ? nil : chr
+    # Gets a single byte from the input buffer for this window. Returns nil if
+    # there are no new characters in the buffer. See `wgetch(3X)`.
+    def getb
+      byte = ::Ncurses.wgetch(wrapee)
+      byte == -1 ? nil : byte
     end
+    
+    ##
+    # Gets a single `Key` from the input buffer for this window.
+    # 
+    # This will asynchronously yield the `Key` to a block you provide, if such
+    # a block is given - in this mode, this method will return `true` if a
+    # `getk` is currently possible (input may become temporarily locked under
+    # certain circumstances), and `nil` if there is no `Key` to get.
+    # 
+    # For the most part, you can expect blocks to be yielded extremely
+    # quickly; however, don't count on this (a sudden, large paste of long-
+    # byte UTF-8 characters could cause each subsequent `getk` to take longer
+    # to yield).
+    # 
+    # This method can also be employed in a synchronous manner if no block is
+    # given; in this mode it acts as no more than a wrapper for `Window#getb`
+    # that automatically processes the ASCII char into a `Key` object. Higher-
+    # byte sequences such as Unicode UTF-8 will be treated as errors in this
+    # mode, returning `false`. Otherwise the `Key`-wrapped ASCII is returned.
+    def getk
+      return nil if self.input_locked?
+      byte = getb
+      return byte unless byte
+      if block_given?
+        case byte
+        when 0..127
+          yield Key.ascii byte
+        when 128..191, 192..193, 254..255
+          yield Key.new "�"
+        when 194..223, 224..239, 240..244, 245..247, 248..251, 252..253
+          handle_unicode byte, &Proc.new
+        end
+        return true
+      else # We'll synchronously return the ASCII value wrapped in a `Key`.
+        case byte
+        when 0..127
+          return Key.ascii byte
+        else
+          return Key.new "�"
+        end
+      end
+    end
+    
+    private
+      ##
+      # Handles a UTF-8 sequence from `getk`.
+      def handle_unicode byte, &handler
+        case byte
+          when 194..223; then bytes = 2 # 2 byte sequence
+          when 224..239; then bytes = 3 # 3 byte sequence
+          when 240..244; then bytes = 4 # 4 byte sequence below 10FFFF
+          when 245..247; then bytes = 4 # 4 byte sequence above 10FFFF
+          when 248..251; then bytes = 5 # 5 byte sequence
+          when 252..253; then bytes = 6 # 6 byte sequence
+        end
+        
+        Thread.start(self, byte, bytes, handler) do |window, first_byte, bytes, handler|
+          uba = [first_byte]
+          
+          Thread.pass while window.input_locked?
+          window.lock_input!
+          
+          until uba.length >= bytes
+            byte = getb
+            if byte
+              case byte
+              when 0..127, 192..193, 254..255, 194..223, 224..239, 240..244, 245..247, 248..251, 252..253
+                Thread.start(handler) {|handler| handler[Key.new "�"] }
+                window.unlock_input!
+                Thread.kill
+              when 128..191
+                uba << byte
+              end
+            end
+            
+            Thread.pass
+          end
+          
+          Thread.start(handler) {|handler| handler[Key.new uba.pack('C*')] }
+          window.unlock_input!
+        end
+      end
+      
+      
+    public
     
     ##
     # This sets this `Window` as the current `Terminal.acceptor`.

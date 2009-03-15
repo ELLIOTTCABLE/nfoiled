@@ -74,7 +74,7 @@ module Nfoiled
     # (if such a block has been defined). See `getch(3X)`.
     def read!
       while true
-        key = Terminal.current.acceptor.gets
+        key = Terminal.current.acceptor.getk
         # TODO: This should be handled more naturally by a Key handler or something
         exit if [Key.new(:etx), Key.new(:eot)].include? key # ^C, ^D
         Terminal.current.acceptor.on_key[key] if key
