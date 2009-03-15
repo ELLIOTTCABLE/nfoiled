@@ -99,8 +99,8 @@ module Nfoiled
     
     ##
     # Prints a string to the window
-    def print string
-      wrapee.printw string
+    def print stringish
+      wrapee.printw stringish.to_s
       update
     end
     
@@ -112,8 +112,8 @@ module Nfoiled
     
     ##
     # Prints a string, followed by a newline, to the window
-    def puts string
-      self.print string.to_s + "\n"
+    def puts stringish
+      self.print stringish.to_s + "\n"
     end
   end
 end
