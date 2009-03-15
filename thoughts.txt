@@ -1,7 +1,7 @@
 - A Key corresponds to a single keypress by the user:
   - A single ASCII byte, such as "a" (97)
   - A series of bytes corresponding to a single Unicode character, such
-    as "√¶" (195,166), "·èú" (225,143,156), or "Ì†ÅÌ∞¶" (240,144,144,166,226,128,157)
+    as "√¶" (195,166), "·èú" (225,143,156), or "Ì†ÅÌ∞¶" (240,144,144,166)
 - A Sequence is a specific series of Keys
   - An escape sequence in an editor, such as:
     M-√¶ (27, (195,166))
