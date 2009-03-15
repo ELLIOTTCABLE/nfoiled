@@ -11,9 +11,8 @@ module Nfoiled
        29 => :gs , 30 => :rs , 31 => :us ,127 => :delete }
     
     ##
-    # Responsible for processing input from `Window#gets`. Returns a new `Key`
-    # object.
-    def self.process charint
+    # Creates a `Key` out of an ASCII integer.
+    def self.ascii charint
       if (32..126).member? charint
         new charint.chr.to_sym
       elsif  Names.member? charint 
