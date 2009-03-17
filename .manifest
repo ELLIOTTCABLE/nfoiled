@@ -1,7 +1,10 @@
+examples/initialization.rb
+lib/nfoiled/window.rb
 lib/nfoiled.rb
 LICENSE.text
 Rakefile.rb
 README.markdown
+spec/nfoiled/window_spec.rb
 spec/nfoiled_spec.rb
 spec/spec_helper.rb
 .manifest

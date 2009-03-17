@@ -3,21 +3,16 @@ require 'nfoiled'
 
 ##
 # This example provides a simple example of setting up an Ncurses interface,
-# and then tearing it down.
+# and then tearing it down. Nothing will be observed other than the clearing
+# of the terminal for 10 seconds.
 
-# First, we need to ensure that Ncurses will exit cleanly (that is, we don't
-# want an interrupt or fatal error to screw up the terminal output after the
-# program exists).
-at_exit { ::Ncurses.endwin }
+# A call to `Nfoiled::initialize` will, basically, do everything for us. Many
+# other initialization methods actually call this for us anyway, so we could
+# even just jump right in and instantiate a window if we so desired.
+Nfoiled::initialize
 
-# Second, the actual initialization of Ncurses. This allocates the necessary
-# memory and initializes all variables.
-::Ncurses.initscr
+# The only thing left to do is update the display, to actually cause it to
+# display!
+Nfoiled::update!
 
-# Finally, we have to update the display.
-::Ncurses.doupdate
-
-# Let's print something and exit!
-puts "woot!"
-
-sleep 10
+sleep 5

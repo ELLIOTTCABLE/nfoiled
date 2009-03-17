@@ -67,6 +67,30 @@ Links
 - [repo.or.cz](http://repo.or.cz/w/nfoiled.git "Nfoiled on repo.or.cz")
     is an alternative repository host
 
+Goals & Todo
+------------
+1. Manage tiling, to some extent, for the user:
+   a. Automatically align windows to the proper locations
+   b. Automatically resize existing windows to accomodate newly created ones
+   c. Manage the handling window resizing, and allow user to specify how each
+      window should handle resizing
+2. Manage efficient updating as much as possible:
+   a. Maintain an "event loop" of updates, and ensure that quickly-sequential
+      window updates correspond to a single `update!` call
+   b. Allow users actions' to schedule updates in sequence
+3. Handle keys/input for the user:
+   a. Run a loop that tracks all input, automatically handling key sequences
+      without Ncurses' signature blocking delay bullshit
+   b. Provide default callbacks for common operations, such as navigating in
+      an input area
+   c. Allow user to override callbacks with their own blocks, to be run on the
+      input of specific keys
+4. Never, ever touch Ncurses' horrid GUI-emulation bits (mouse handling,
+   overlapping panels, window borders, widgets). People who want that retarded
+   shit can call directly out to Ncurses, or even just suck it. Seriously,
+   people, stop trying to emulate GUIs in a terminal! Textmode UI is a totally
+   different art. Learn it, take a look at `irssi` or `rat` some time. </rant>
+
 License
 -------
 Nfoiled is copyright 2008 by elliott cable.

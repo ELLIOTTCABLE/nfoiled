@@ -1,0 +1,49 @@
+- A Key corresponds to a single keypress by the user:
+  - A single ASCII byte, such as "a" (97)
+  - A series of bytes corresponding to a single Unicode character, such
+    as "Ã¦" (195,166), "áœ" (225,143,156), or "í í°¦" (240,144,144,166)
+- A Sequence is a specific series of Keys
+  - An escape sequence in an editor, such as:
+    M-Ã¦ (27, (195,166))
+  - A cheat sequence in a game, such as:
+    â†’â†‘â†’ (M[C-M[A-M[C) ((27,91,67), (27,91,65), (27,91,67))
+
+- Not sure how to handle the fact that Unicode needs multiple bytes of input
+  - Will I have to have some sort of global loop?
+    - Time pauses 'tween bytes to form Key objects, synchronize `doupdate` calls
+      for perceived speed
+    - Pain in the ass
+      - Ruby Threads? Seriously? >,>
+  - What about a *single*, *central* global loop?
+    - Something like Rack that handles "the Loop" for everything that needs it
+      (EventMachine, XMPP4R, Rack, and Nfoiled?)
+    - Any library can schedule things to work during the loop, all must be non-
+      blocking etc
+  - What about popping a thread everytime a non-ASCII byte is read?
+    - Do all Unicode characters start with a non-ASCII byte? How are they
+      sequential? (for #succ, etc)
+    - I could pop a `Thread`, and instruct it to `gets` until it receives a
+      nil, indicating the byte sequence is over.
+      - Do Unicode characters of different byte-lengths pad with nils to a
+        specific number of bytes? Try turning back on the display of `nil`s
+        and let's see.
+      - Do all terminals send the bytes of a unicode character fast enough to
+        prevent intervening cyclings of `gets`? Must experiment on a really
+        fast computer.
+      - What if you were to provide input so fast as to prevent an successive
+        nil? Is that possible? Must experiement with pasting Unicode
+        characters/typing very fast.
+      - If for some reason the user had turned back on `delay` mode or set a
+        non-zero`wtimeout`, we'd have to retreive and save that value, then
+        switch into `nodelay` mode; retreive the Unicode bytes; and re-set
+        their preferred input mode.
+      - If we're already in a `gets` loop ... we'd have to have an 'input
+        lock' of some sort, to ensure that the `gets` from the original input
+        loop doesn't accidentally 'steal' a byte from the middle of the
+        Unicode series. (and recognize it as a Unicode byte, and start a new
+        `Thread`, and ... so on)
+      - Speed concerns involving popping a new thread for every Unicode
+        character. Will have to benchmark a bit.
+    - Would mean we couldn't handle `doupdate` calls in a sexy way ... have to
+      leave that up to the user. Which is probably fine anyway, I guess, just
+      doesn't feel as sexy.
