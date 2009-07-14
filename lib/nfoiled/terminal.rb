@@ -52,8 +52,10 @@ module Nfoiled
       @term = opts[:term]
       
       @wrapee = ::Ncurses.newterm(opts[:term], opts[:out], opts[:in])
-      Terminal.current = self
       Terminal.terminals << self
+      
+      activate
+      
       Nfoiled::initialize
     end
     
