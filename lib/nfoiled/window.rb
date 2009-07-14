@@ -1,3 +1,5 @@
+# coding: UTF-8
+
 module Nfoiled
   ##
   # An `Nfoiled::Window` is a "box" in the terminal to which output can be
