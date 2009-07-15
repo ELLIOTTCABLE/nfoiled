@@ -56,6 +56,8 @@ module Nfoiled
       
       activate
       
+      @acceptor = Window.new
+      
       Nfoiled::initialize
     end
     
